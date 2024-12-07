@@ -1,5 +1,4 @@
 import tkinter as tk
-import os
 import datetime
 from datetime import date
 from tkcalendar import DateEntry
