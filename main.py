@@ -83,10 +83,17 @@ class app:
         #创建一个标签，用于展示警告
         self.warning_label = tk.Label(self.root, text="", fg="red")
         self.warning_label.grid(row=5, column=4, rowspan=4)
+        #创建框架，用于容纳两个按钮
+        self.button_frame = tk.Frame(self.root)
+        self.button_frame.grid(row=100, column=4, rowspan=10)
         #创建按钮，位置在列表框下，窗口的底部，点击后触发函数edit_schedule
-        self.edit_schedule_button = tk.Button(self.root, text="编辑日程",font=("Arial", 18), width=20, height=1, command=self.edit_schedule)
-        self.edit_schedule_button.grid(row=100, column=4, rowspan=10)
+        self.edit_schedule_button = tk.Button(self.button_frame, text="编辑日程",font=("Arial", 18), width=10, height=1, command=self.edit_schedule)
+        self.edit_schedule_button.grid(row=0, column=0, rowspan=2)
         self.show_all_schedule()
+        #创建按钮，位置在列表框下，窗口的底部，点击后触发函数的delete_schedule
+        self.delete_schedule_button = tk.Button(self.button_frame, text="删除日程",font=("Arial", 18), width=10, height=1, command=self.delete_schedule)
+        self.delete_schedule_button.grid(row=0, column=1, rowspan=2)
+
     
     def year_minus(self):
         print("年份-")
@@ -247,6 +254,52 @@ class app:
                 self.schedule_listbox.insert(tk.END, '从'+start_date_list[0]+'年'+start_date_list[1]+'月'+start_date_list[2]+'日'+line[1]+'到'+end_date_list[0]+'年'+end_date_list[1]+'月'+end_date_list[2]+'日'+line[3]+'    '+line[4]+'   '+line[5])
     
     
+    def delete_schedule(self):
+        global schedule_list
+        if len(schedule_list)==0:
+            print("请先添加日程")
+            self.warning_label.config(text="请先添加日程")
+            return
+        del_date = self.schedule_listbox.curselection()
+        if len(del_date)==0:
+            print("请选择一个日程")
+            self.warning_label.config(text="请选择一个日程")
+            return
+        # 获取被点击列表框中被点击的行号
+        self.warning_label.config(text="")
+        # 获取被点击列表框中被点击的行号
+        line_number=del_date[0]
+        # 获取被点击列表框中被点击的行的内容
+        LineInList=schedule_list[line_number]
+        #创建一个新的窗口，询问是否删除这个日程
+        edit_schedule_window = tk.Toplevel(self.root)
+        edit_schedule_window.title("编辑日程")
+        edit_schedule_window.geometry("300x200+100+100")
+        edit_schedule_window.minsize(530,150)
+        edit_schedule_window.maxsize(530,150)
+        # 创建一个标签，询问是否删除这个日程
+        del_schedule_label = tk.Label(edit_schedule_window, text="确定删除这个日程？")
+        del_schedule_label.grid(row=0, column=0, columnspan=2)
+        # 创建一个按钮，点击后删除这个日程
+        del_schedule_button = tk.Button(edit_schedule_window, text="确定", command=lambda: delete_schedule_confirm(LineInList))
+        del_schedule_button.grid(row=1, column=0)
+        # 创建一个按钮，点击后关闭这个窗口
+        close_schedule_button = tk.Button(edit_schedule_window, text="取消", command=edit_schedule_window.destroy)
+        close_schedule_button.grid(row=1, column=1)
+
+        def delete_schedule_confirm(self,LineInList):
+            with open('date', 'r', encoding='utf-8') as file:
+                lines = file.readlines()
+                print(lines)
+                lines.append('')
+                print(lines)
+                line=lines.pop(LineInList[-1])
+            # 把lines中的内容写入date文件
+            with open('date', 'w', encoding='utf-8') as file:
+                file.writelines(lines)
+            # 对date文件进行排序
+            sort_by_start_date('date')
+            edit_schedule_window.destroy()
     def edit_schedule(self):
 
         global schedule_list
@@ -403,7 +456,6 @@ class app:
         global schedule_list
         #清空schedule_list
         schedule_list.clear()
-        sort_by_start_date('date')
         #按行读取date文件
         with open("date", "r",encoding='utf-8') as f:
             # 按行读取date文件
