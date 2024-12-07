@@ -131,8 +131,6 @@ class app:
         self.create_calendar()
 
 
-
-
     def create_calendar(self):
         print("创建日历")
         # 清空日历区域
@@ -247,8 +245,6 @@ class app:
                 start_date_list=[i for i in line[0].split("-")]
                 end_date_list=[i for i in line[2].split("-")]
                 self.schedule_listbox.insert(tk.END, '从'+start_date_list[0]+'年'+start_date_list[1]+'月'+start_date_list[2]+'日'+line[1]+'到'+end_date_list[0]+'年'+end_date_list[1]+'月'+end_date_list[2]+'日'+line[3]+'    '+line[4]+'   '+line[5])
-    
-    
     
     
     def edit_schedule(self):
@@ -440,9 +436,6 @@ class app:
                 end_date_list=[i for i in line[2].split("-")]
                 self.schedule_listbox.insert(tk.END, '从'+start_date_list[0]+'年'+start_date_list[1]+'月'+start_date_list[2]+'日'+line[1]+'到'+end_date_list[0]+'年'+end_date_list[1]+'月'+end_date_list[2]+'日'+line[3]+'    '+line[4]+'   '+line[5])
 
-        
-
-            
 
     def add_schedule(self):
         # 创建一个新的窗口，用于添加日程
