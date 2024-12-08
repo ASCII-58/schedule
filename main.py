@@ -290,7 +290,7 @@ class app:
         edit_schedule_label = tk.Label(edit_schedule_window, text="确定删除这个日程吗？",font=('', 14))
         edit_schedule_label.pack(side=tk.TOP, pady=10)
         # 创建一个按钮，点击后删除这个日程
-        del_schedule_button = tk.Button(edit_schedule_window, text="确定", command=lambda: delete_schedule_confirm(LineInList))
+        del_schedule_button = tk.Button(edit_schedule_window, text="确定", command=lambda: delete_schedule_confirm(self,LineInList))
         del_schedule_button.pack(side=tk.LEFT, padx=10)
         # 创建一个按钮，点击后关闭这个窗口
         close_schedule_button = tk.Button(edit_schedule_window, text="取消", command=edit_schedule_window.destroy)
