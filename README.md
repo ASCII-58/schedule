@@ -7,4 +7,5 @@
 - [x] 支持编辑日程
 - [x] 支持删除日程
 ## 截图
-![image](https://vip.123pan.cn/1837484026/ymjew503t0l000d5qave6p4ry02x8tqeDIYwAwF1AdavApxzDwQ0.png)
+- 主界面
+![image](https://github.com/xyxy1029/imghub/blob/main/home.png?raw=true)
