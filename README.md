@@ -6,4 +6,5 @@
 - [x] 支持查看日程
 - [x] 支持编辑日程
 - [x] 支持删除日程
-
+## 截图
+![image](https://github.com/liuxinyu95/awesome-python3-webapp/blob/master/schedule/schedule.png)

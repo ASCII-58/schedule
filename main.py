@@ -3,6 +3,16 @@ import datetime
 from datetime import date
 from tkcalendar import DateEntry
 from datetime import datetime
+import os
+
+
+#检查工作目录
+directory=os.getcwd()
+print(os.getcwd())
+#若工作目录不包含schedule，则更改当前目录
+if not 'schedule' in directory:
+    os.chdir(directory+'/schedule')
+    print(os.getcwd())
 
 #检查是否存在date文件，如果不存在，则创建一个新的文件
 try:
@@ -11,6 +21,7 @@ try:
 except:
     with open('date', 'w', encoding='utf-8') as f:
         f.write('')
+
 # 定义一个函数，用于根据date文件中的开始日期和开始时间进行排序
 def sort_by_start_date(file_name):
     with open(file_name, 'r', encoding='utf-8') as f:
@@ -33,6 +44,7 @@ print("当前日期:", current_date)
 print(type(current_date))
 current_date=str(current_date)
 print(type(current_date))
+
 class app:
     def __init__(self,year,month):
         self.year=int(year)
@@ -273,18 +285,16 @@ class app:
         #创建一个新的窗口，询问是否删除这个日程
         edit_schedule_window = tk.Toplevel(self.root)
         edit_schedule_window.title("编辑日程")
-        edit_schedule_window.geometry("300x200+100+100")
-        edit_schedule_window.minsize(530,150)
-        edit_schedule_window.maxsize(530,150)
-        # 创建一个标签，询问是否删除这个日程
-        del_schedule_label = tk.Label(edit_schedule_window, text="确定删除这个日程？")
-        del_schedule_label.grid(row=0, column=0, columnspan=2)
+        
+        # 创建一个标签，询问是否删除这个日程,并居中
+        edit_schedule_label = tk.Label(edit_schedule_window, text="确定删除这个日程吗？",font=('', 14))
+        edit_schedule_label.pack(side=tk.TOP, pady=10)
         # 创建一个按钮，点击后删除这个日程
         del_schedule_button = tk.Button(edit_schedule_window, text="确定", command=lambda: delete_schedule_confirm(LineInList))
-        del_schedule_button.grid(row=1, column=0)
+        del_schedule_button.pack(side=tk.LEFT, padx=10)
         # 创建一个按钮，点击后关闭这个窗口
         close_schedule_button = tk.Button(edit_schedule_window, text="取消", command=edit_schedule_window.destroy)
-        close_schedule_button.grid(row=1, column=1)
+        close_schedule_button.pack(side=tk.RIGHT, padx=10)
 
         def delete_schedule_confirm(self,LineInList):
             with open('date', 'r', encoding='utf-8') as file:
