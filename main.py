@@ -551,8 +551,8 @@ class app:
         #把ScheduleTime转换为dateti0me格式
         ScheduleTime=str(date_start)+" "+time_start+':00'
         EndDT=str(date_end)+" "+time_end+':00'
-        date_startDT=datetime.datetime.strptime(ScheduleTime, '%Y-%m-%d %H:%M:00')
-        date_endDT=datetime.datetime.strptime(EndDT, '%Y-%m-%d %H:%M:00')
+        date_startDT=datetime.strptime(ScheduleTime, '%Y-%m-%d %H:%M:00')
+        date_endDT=datetime.strptime(EndDT, '%Y-%m-%d %H:%M:00')
         if date_startDT > date_endDT:
             print("开始时间不能晚于结束时间")
             warning_label.config(text="还没开始就结束了？")
@@ -563,6 +563,8 @@ class app:
             f.write(ScheduleLine)
         # 对date文件进行排序
         sort_by_start_date('date')
+        #添加成功
+        print("添加成功")
         # 关闭窗口
         window.destroy()
         #更新self.schedule_listbox列表框
