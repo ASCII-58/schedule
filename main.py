@@ -26,6 +26,10 @@ except:
 def sort_by_start_date(file_name):
     with open(file_name, 'r', encoding='utf-8') as f:
         lines = f.readlines()
+    lines=[i for i in lines if i!= '\n']
+    if len(lines)==0:
+        print("无日程，无需排序")
+        return
     for i in range(len(lines)):
         lines[i] = lines[i].strip()
         lines[i] = lines[i].split("/")
@@ -284,7 +288,7 @@ class app:
         LineInList=schedule_list[line_number]
         #创建一个新的窗口，询问是否删除这个日程
         edit_schedule_window = tk.Toplevel(self.root)
-        edit_schedule_window.title("编辑日程")
+        edit_schedule_window.title("删除日程")
         
         # 创建一个标签，询问是否删除这个日程,并居中
         edit_schedule_label = tk.Label(edit_schedule_window, text="确定删除这个日程吗？",font=('', 14))
