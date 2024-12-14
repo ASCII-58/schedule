@@ -14,4 +14,4 @@
 ### 编辑日程
 ![image](https://github.com/xyxy1029/imghub/blob/main/edit_schedule.png?raw=true)
 ### 删除日程
-![image](https://github.com/xyxy1029/imghub/blob/main/delete_schedule.png?raw=true)
+![image](https://github.com/xyxy1029/imghub/blob/main/delete_schedule.png?raw=true)`

@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import datetime
 from datetime import date
 from tkcalendar import DateEntry
@@ -92,6 +93,7 @@ class app:
         #创建一个标签，用于显示选中日期
         self.selected_date_label = tk.Label(self.frame, text="所有日程")
         self.selected_date_label.grid(row=0, column=0,rowspan=2)
+        
         #在窗口右侧创建一个列表框，用于显示选中日期的日程，大小撑满所占位置
         self.schedule_listbox = tk.Listbox(self.root, width=56, height=22)
         self.schedule_listbox.grid(row=0, column=4, rowspan=10)
@@ -212,6 +214,7 @@ class app:
         self.schedule_listbox.delete(0, tk.END)
         if len(schedule_list)==0:
             self.schedule_listbox.insert(tk.END, "无日程")
+            print('无日程')
         else:
             for line in schedule_list:
                 #在self.schedule_listbox列表框中显示所有日程
@@ -261,6 +264,7 @@ class app:
         #判断是否有日程，如果有，则在self.schedule_listbox列表框中显示所有日程
         if len(schedule_list)==0:
             self.schedule_listbox.insert(tk.END, "无日程")
+            print('无日程')
         else:
             for line in schedule_list:
                 #在self.schedule_listbox列表框中显示所有日程
@@ -512,10 +516,12 @@ class app:
         # 创建一个标签，提示输入日期
         date_label = tk.Label(add_schedule_window, text="请输入开始日期:")
         date_label.grid(row=0, column=0)
-        #使用DateEntry库创建一个人性化的日期选择器
+        #使用DateEntry库创建日期选择器
+                # 使用DateEntry库创建一个人性化的日期选择器，并设置日期格式为yyyy/mm/dd
         date_start_entry = DateEntry(add_schedule_window, width=12, background='darkblue',
-                        foreground='white', borderwidth=2)
+                        foreground='white', borderwidth=2, date_pattern='yyyy/mm/dd')
         date_start_entry.grid(row=0, column=1)
+
         # 创建一个标签，提示输入开始时间
         time_label = tk.Label(add_schedule_window, text="请输入开始时间(hh:mm):")
         time_label.grid(row=0, column=2)
@@ -527,7 +533,7 @@ class app:
         date_label.grid(row=1, column=0)
         # 使用DateEntry库创建一个人性化的日期选择器
         date_end_entry = DateEntry(add_schedule_window, width=12, background='darkblue',
-                        foreground='white', borderwidth=2)
+                        foreground='white', borderwidth=2, date_pattern='yyyy/mm/dd')
         date_end_entry.grid(row=1, column=1)
         # 创建一个标签，提示输入结束时间
         time_label = tk.Label(add_schedule_window, text="请输入结束时间(hh:mm):")
@@ -539,7 +545,7 @@ class app:
         type_label = tk.Label(add_schedule_window, text="请输入日程类型:")
         type_label.grid(row=2, column=0)
         # 创建一个文本框，用于输入日程类型
-        type_entry = tk.Entry(add_schedule_window)
+        type_entry = tk.Entry(add_schedule_window,width=15)
         type_entry.grid(row=2, column=1)
         # 创建一个标签，提示输入日程内容
         content_label = tk.Label(add_schedule_window, text="请输入日程内容:")
