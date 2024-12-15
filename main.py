@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 import datetime
 from datetime import date
 from tkcalendar import DateEntry
@@ -371,7 +370,7 @@ class app:
         date_label = tk.Label(edit_schedule_window, text="请输入开始日期:")
         date_label.grid(row=0, column=0)
         #使用DateEntry库创建一个人性化的日期选择器
-        date_start_entry = DateEntry(edit_schedule_window, width=12, background='darkblue',foreground='white', borderwidth=2)
+        date_start_entry = DateEntry(edit_schedule_window, width=12, background='darkblue',foreground='white', borderwidth=2, date_pattern='yyyy/mm/dd')
         date_start_entry.grid(row=0, column=1)
         date_start_entry.set_date(set_start_date)
         # 创建一个标签，提示输入开始时间
@@ -385,7 +384,7 @@ class app:
         date_label = tk.Label(edit_schedule_window, text="请输入结束日期:")
         date_label.grid(row=1, column=0)
         # 使用DateEntry库创建一个人性化的日期选择器
-        date_end_entry = DateEntry(edit_schedule_window, width=12, background='darkblue',foreground='white', borderwidth=2)
+        date_end_entry = DateEntry(edit_schedule_window, width=12, background='darkblue',foreground='white', borderwidth=2, date_pattern='yyyy/mm/dd')
         date_end_entry.grid(row=1, column=1)
         date_end_entry.set_date(set_end_date)
         # 创建一个标签，提示输入结束时间
