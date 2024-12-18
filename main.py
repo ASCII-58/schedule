@@ -71,9 +71,10 @@ class app:
         self.year = int(year)
         self.month = int(month)
         self.root = tk.Tk()
-
         self.root.geometry("700x530")
 
+        self.root.iconbitmap('ico.ico')
+        
         self.root.title("日历")
         self.root.grid_rowconfigure(4, weight=1)
 
@@ -336,6 +337,10 @@ class app:
                 ):
                     continue
                 else:
+                    if (start_date_list[0]==int(year) and start_date_list[1]==int(month) and start_date_list[2]==int(DayInMonth)):
+                        line_list.append('start')
+                    if (end_date_list[0]==int(year) and end_date_list[1]==int(month) and end_date_list[2]==int(DayInMonth)):
+                        line_list.append('end')
                     line_list.append(i)
                     schedule_list.append(line_list)
         # 清空self.schedule_listbox列表框
@@ -346,33 +351,20 @@ class app:
             print("无日程")
         else:
             for line in schedule_list:
-                # 在self.schedule_listbox列表框中显示所有日程
-                start_date_list = [i for i in line[0].split("-")]
-                end_date_list = [i for i in line[2].split("-")]
-                self.schedule_listbox.insert(
-                    tk.END,
-                    "从"
-                    + start_date_list[0]
-                    + "年"
-                    + start_date_list[1]
-                    + "月"
-                    + start_date_list[2]
-                    + "日"
-                    + line[1]
-                    + "到"
-                    + end_date_list[0]
-                    + "年"
-                    + end_date_list[1]
-                    + "月"
-                    + end_date_list[2]
-                    + "日"
-                    + line[3]
-                    + "    "
-                    + line[4]
-                    + "   "
-                    + line[5],
-                )
-
+                #在self.schedule_listbox列表框中显示所有日程
+                start_date_list=[i for i in line[0].split("-")]
+                end_date_list=[i for i in line[2].split("-")]
+                print(line)
+                if len(line)==9:
+                    self.schedule_listbox.insert(tk.END, '从'+start_date_list[0]+'年'+start_date_list[1]+'月'+start_date_list[2]+'日'+line[1]+'到'+end_date_list[0]+'年'+end_date_list[1]+'月'+end_date_list[2]+'日'+line[3]+'    '+line[4]+'   '+line[5]+'  仅在今日')
+                elif (len(line)==8)&(line[-2]=='start'):
+                    self.schedule_listbox.insert(tk.END, '从'+start_date_list[0]+'年'+start_date_list[1]+'月'+start_date_list[2]+'日'+line[1]+'到'+end_date_list[0]+'年'+end_date_list[1]+'月'+end_date_list[2]+'日'+line[3]+'    '+line[4]+'   '+line[5]+'  今日开始')
+                elif (len(line)==8)&(line[-2]=='end'):
+                    self.schedule_listbox.insert(tk.END, '从'+start_date_list[0]+'年'+start_date_list[1]+'月'+start_date_list[2]+'日'+line[1]+'到'+end_date_list[0]+'年'+end_date_list[1]+'月'+end_date_list[2]+'日'+line[3]+'    '+line[4]+'   '+line[5]+'  今日结束')
+                else:
+                    self.schedule_listbox.insert(tk.END, '从'+start_date_list[0]+'年'+start_date_list[1]+'月'+start_date_list[2]+'日'+line[1]+'到'+end_date_list[0]+'年'+end_date_list[1]+'月'+end_date_list[2]+'日'+line[3]+'    '+line[4]+'   '+line[5]+'  全天')
+    
+    
     def delete_schedule(self):
         global schedule_list
         if len(schedule_list) == 0:
@@ -393,7 +385,8 @@ class app:
         # 创建一个新的窗口，询问是否删除这个日程
         edit_schedule_window = tk.Toplevel(self.root)
         edit_schedule_window.title("删除日程")
-
+        edit_schedule_window.iconbitmap('ico.ico')
+       
         # 创建一个标签，询问是否删除这个日程,并居中
         edit_schedule_label = tk.Label(
             edit_schedule_window, text="确定删除这个日程吗？", font=("", 14)
@@ -474,8 +467,9 @@ class app:
         edit_schedule_window = tk.Toplevel(self.root)
         edit_schedule_window.title("编辑日程")
         edit_schedule_window.geometry("300x200+100+100")
-        edit_schedule_window.minsize(530, 150)
-        edit_schedule_window.maxsize(530, 150)
+        edit_schedule_window.minsize(530,150)
+        edit_schedule_window.maxsize(530,150)
+        edit_schedule_window.iconbitmap('ico.ico')
         # 创建一个标签，提示输入日期
         date_label = tk.Label(edit_schedule_window, text="请输入开始日期:")
         date_label.grid(row=0, column=0)
@@ -728,8 +722,9 @@ class app:
         add_schedule_window = tk.Toplevel(self.root)
         add_schedule_window.title("添加日程")
         add_schedule_window.geometry("300x200+100+100")
-        add_schedule_window.minsize(530, 150)
-        add_schedule_window.maxsize(530, 150)
+        add_schedule_window.minsize(530,150)
+        add_schedule_window.maxsize(530,150)
+        add_schedule_window.iconbitmap('ico.ico')
         # 创建一个标签，提示输入日期
         date_label = tk.Label(add_schedule_window, text="请输入开始日期:")
         date_label.grid(row=0, column=0)
