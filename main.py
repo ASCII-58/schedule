@@ -9,9 +9,12 @@ import os
 # 检查工作目录
 directory = os.getcwd()
 print(os.getcwd())
+# 获取自身绝对目录
+io = os.path.dirname(__file__)
+print(io)
 # 若工作目录不包含schedule，则更改当前目录
 if not "schedule" in directory:
-    os.chdir(directory + "/schedule")
+    os.chdir(io)
     print(os.getcwd())
 
 # 检查是否存在date文件，如果不存在，则创建一个新的文件
